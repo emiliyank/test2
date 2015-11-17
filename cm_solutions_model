@@ -1,0 +1,23 @@
+<?php
+class Cm_solutions_model extends CI_Model{
+    public function __construct() {
+        parent::__construct();
+    }
+
+    public function add_student_solution(){
+    	$now = date('Y-m-d H:i:s');
+        
+        $solution_data = array(
+            'cm_student_project_id' => $this->input->post('student_course_id'),
+            'solution' => $this->input->post('student_solution'),
+            'is_final' => $this->input->post('is_final'),
+
+            'date_created' => $now,
+            'created_by' => $this->session->userdata('user_id')
+        );
+        
+        $insert = $this->db->insert('cm_student_solutions', $solution_data);
+        
+        return $insert;
+    }
+}
